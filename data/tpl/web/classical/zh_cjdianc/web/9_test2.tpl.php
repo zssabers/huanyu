@@ -1,0 +1,86 @@
+<?php defined('IN_IA') or exit('Access Denied');?><?php (!empty($this) && $this instanceof WeModuleSite || 1) ? (include $this->template('public/header', TEMPLATE_INCLUDEPATH)) : (include template('public/header', TEMPLATE_INCLUDEPATH));?>
+<?php (!empty($this) && $this instanceof WeModuleSite || 1) ? (include $this->template('public/comhead', TEMPLATE_INCLUDEPATH)) : (include template('public/comhead', TEMPLATE_INCLUDEPATH));?>
+<style type="text/css">
+    .nav-tabs>li>a:hover{
+        color: #333;
+        border-color: #31C2A5;
+        background-color: white;
+    }
+    .nav-tabs > li.active > a,.nav-tabs > li.active > a:hover{
+        background-color: #31C2A5;
+        color: white;
+        border-color: #31C2A5;
+    }
+    .nav.nav-tabs{border-color: #31C2A5;margin-top: 30px;}
+    .yg5_key>div{float: left;line-height: 34px;}
+    .store_td1{height: 45px;}
+    .store_list_img{width: 60px;height: 60px;}
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;}
+    .yg5_tr2>td{padding: 10px 15px;border: 1px solid #e5e5e5;}
+    .yg5_tr1>th{
+        border: 1px solid #e5e5e5;
+        padding-left: 15px;
+        background-color: #FAFAFA;
+        font-weight: bold;
+    }
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+	.navback{display:none}
+	.yg_back{margin-left: 150px;}
+</style>
+<ul class="nav nav-tabs">    
+    <li class="active"><a href="javascript:void(0);" style="background: #44ABF7;">员工管理</a></li>
+    <li><a href="<?php  echo $this->createWebUrl2('yg17')?>">添加员工</a></li>
+	<li><a style="color:red;">注：此功能慎用</a></li>
+</ul>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-lg-12">
+        <form action="" method="POST" class="col-md-12">
+            <!--<select class="col-md-2">
+                <option>服务员</option>
+                <option>收银员</option>
+                <option>配送员</option>
+                <option>老板</option>
+            </select>-->
+            <div class="col-md-4">
+                <div class="input-group" style="width: 300px">
+                    <input type="text" name="keywords" class="form-control" placeholder="请输入姓名">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-default" name="submit" value="查找"/>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div><!-- /.col-lg-6 -->
+</div> 
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            员工列表管理
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12">
+                    <tr class="yg5_tr1">
+                        <th class="store_td1 col-md-1">ID</th>
+                        <th class="col-md-3">员工名称</th>
+						<th class="col-md-2">员工头像</th>
+                        <th class="col-md-2">手机号码</th>
+                        <th class="col-md-2">操作</th>
+                    </tr>
+                    <?php  if(is_array($list)) { foreach($list as $row) { ?>
+                    <tr class="yg5_tr2">
+                        <td><div class="type-parent"><?php  echo $row['id'];?></div></td>
+						<td><div class="type-parent"><?php  echo $row['fw_name'];?></div></td>
+                        <td><div class="type-parent"><img class="store_list_img" src="<?php  echo $row['picture'];?>"/></div></td>
+                        <td><div class="type-parent"><?php  echo $row['phone'];?></div></td>
+                        <td><a class="btn btn-warning btn-sm" href="<?php  echo $this->createWebUrl2('yg17', array('id' => $row['id']))?>" title="编辑">改</a>&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="<?php  echo $this->createWebUrl2('test2', array('op' => 'delete', 'id' => $row['id']))?>" onclick="return confirm('确认删除吗？');return false;" title="删除">删</a></td>
+                    </tr>
+                    <?php  } } ?>
+                    
+                </table>
+            </div>
+        </form>
+    </div>
+    <?php  echo $pager;?>
+</div>
+<?php (!empty($this) && $this instanceof WeModuleSite || 1) ? (include $this->template('common/footer', TEMPLATE_INCLUDEPATH)) : (include template('common/footer', TEMPLATE_INCLUDEPATH));?>

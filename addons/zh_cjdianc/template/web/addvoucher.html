@@ -1,0 +1,188 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/zh_cjdianc/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+    .store_td1{height: 45px;}
+    .store_list_img{width: 60px;height: 60px;}
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;}
+    .yg5_tr2>td{padding: 10px 15px;border: 1px solid #e5e5e5;}
+    .yg5_tr1>th{
+        border: 1px solid #e5e5e5;
+        padding-left: 15px;
+        background-color: #FAFAFA;
+        font-weight: bold;
+    }
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+	.navback{display:none}
+	.yg_back {margin-left: 150px;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li><a href="{php echo $this->createWebUrl2('voucher')}">充值活动管理</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl2('addvoucher')}">添加/编辑套餐</a></li>
+</ul>
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <!--<input type="hidden" name="parentid" value="{$parent['id']}" />-->
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                添加/编辑套餐
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="" method="POST">
+
+
+
+  <div class="form-group">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">套餐名称</label>
+
+    <div class="col-sm-10">
+
+      <input type="text"  name="czname" value="{$list['czname']}" class="form-control" id="inputEmail3" placeholder="请填写套餐名称">
+
+    </div>
+
+  </div>
+  
+  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">套餐开关</label>
+                    <div class="col-sm-9">
+                        <span class="radio-inline">
+                            <input id="mored" type="radio" name="state" value="1" {if $list['state']==1}checked{/if} />
+                            <label for="mored">开启</label>              
+                        </span>
+                        <span class="radio-inline">
+                            <input id="moredan" type="radio" name="state" value="0" {if $list['state']==0}checked{/if} /> 
+                            <label for="moredan">关闭</label>
+                        </span>
+                    </div>
+      </div>
+	  
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">活动充值金额</label>
+    <div class="col-sm-5">
+      <div class="input-group">
+          <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')"  name="czjenum" value="{$list['czjenum']}" class="form-control" id="inputEmail3" placeholder="请填写充值金额">
+          <span class="input-group-addon">元</span>
+      </div>
+	  <div class="help-block">*最低不得低于{$hdsz['zd_czjenum']}元</div>
+    </div>
+  </div>
+
+<div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">优惠券名称</label>
+    <div class="col-sm-10">
+      <input type="text"  name="name" value="{$coupon['name']}" class="form-control" id="inputEmail3" placeholder="请填写优惠券名称">
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">优惠条件金额</label>
+    <div class="col-sm-5">
+      <div class="input-group">
+          <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')"  name="full" value="{$list['full']}" class="form-control" id="inputEmail3" placeholder="请填写优惠条件金额">
+          <span class="input-group-addon">元</span>
+      </div>
+	  <div class="help-block">*最低不得低于{$hdsz['yhq_full']}元</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">优惠金额</label>
+    <div class="col-sm-5">
+      <div class="input-group">
+        <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')"  name="reduce" value="{$list['reduce']}" class="form-control" id="inputEmail3" placeholder="请填写优惠金额">
+        <span class="input-group-addon">元</span>
+      </div>
+	  <div class="help-block">*最低不得低于{$hdsz['yhq_reduce']}元</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">优惠券佣金</label>
+    <div class="col-sm-5">
+      <div class="input-group">
+        <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')"  name="commission" value="{$coupon['commission']}" class="form-control" id="inputEmail3" placeholder="请填写优惠劵佣金金额">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">赠送优惠券数量</label>
+    <div class="col-sm-10">
+      <input type="number"  name="yhqnum" value="{$list['yhqnum']}" class="form-control" id="inputEmail3" placeholder="请填写赠送优惠券数量">
+	   <div class="help-block">*最低不得低于{$hdsz['zd_yhqnum']}张</div>
+    </div>
+	
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">优惠券时间</label>
+    <div class="col-sm-10">
+    {php echo tpl_form_field_dateranges('time',array('start' =>$coupon['start_time'], 'end' =>$coupon['end_time']));} 
+    </div>
+  </div>
+  <div class="form-group">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">使用说明</label>
+
+    <div class="col-sm-10">
+
+      <input type="text"  name="instruction" value="{$coupon['instruction']}" class="form-control" id="inputEmail3" placeholder="请填写使用说明">
+
+    </div>
+
+  </div>
+  <div class="form-group">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">充值说明</label>
+
+    <div class="col-sm-10">
+
+      <input type="text"  name="des" value="{$list['des']}" class="form-control" id="inputEmail3" placeholder="请填写充值说明">
+
+    </div>
+
+  </div>
+   <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">设置使用范围</label>
+      <div class="col-sm-10">
+        <select class="form-control" name="type"> 
+          {if $coupon['type']==1}  
+            <option value="1" selected="selected">仅限外卖使用</option>  
+            <option value="2">仅限店内使用</option>
+            <option value="3">两者都可使用</option>
+          {elseif $coupon['type']==2}
+            <option value="1" >仅限外卖使用</option>    
+            <option value="2" selected="selected">仅限店内使用</option>
+            <option value="3">两者都可使用</option>
+          {elseif $coupon['type']==3}
+            <option value="1" >仅限外卖使用</option>  
+            <option value="2">仅限店内使用</option>
+            <option value="3" selected="selected">两者都可使用</option>
+          {else}
+            <option value="1" >仅限外卖使用</option>
+            <option value="2">仅限店内使用</option>
+            <option value="3">两者都可使用</option>
+          {/if}
+        </select>
+      </div>
+    </div>
+     </div>
+
+   <input type="hidden" name="id" value="{$list['id']}"/>
+   <input type="hidden" name="coupon_id" value="{$coupon['id']}"/>
+  <input type="hidden" name="token" value="{$_W['token']}"/>
+
+  <div class="form-group" style="margin-top: 20px;">
+      <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #44ABF7;"/>
+  </div>
+</form>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-4").show();
+        $("#yframe-4").addClass("wyactive");
+    })
+</script>
+{template 'common/footer'}
